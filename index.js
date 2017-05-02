@@ -6,11 +6,14 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // DB Setup
 mongoose.connect('mongodb://localhost:auth/auth');
 
 // App Setup
+app.use(cors());
+// CORS is currently open to all domains, add an argument to change this
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
